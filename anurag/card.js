@@ -8,13 +8,6 @@ const CONTACT = {
   instagram: "https://www.instagram.com/wildbook.in",
 };
 
-const COPY_ICON = `
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="9" y="9" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.75" />
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.75" />
-  </svg>
-`;
-
 const CHECK_ICON = `
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -67,9 +60,9 @@ async function copyText(value) {
 }
 
 function setupCopyButtons() {
-  document.querySelectorAll(".copy-btn").forEach((button) => {
-    button.innerHTML = COPY_ICON;
+  document.querySelectorAll(".field-copy").forEach((button) => {
     const originalLabel = button.getAttribute("aria-label") || "Copy";
+    const originalIcon = button.innerHTML;
 
     button.addEventListener("click", async (event) => {
       event.preventDefault();
@@ -89,7 +82,7 @@ function setupCopyButtons() {
 
       window.setTimeout(() => {
         button.classList.remove("is-copied");
-        button.innerHTML = COPY_ICON;
+        button.innerHTML = originalIcon;
         button.setAttribute("aria-label", originalLabel);
       }, 1400);
     });
