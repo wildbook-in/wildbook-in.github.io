@@ -8,6 +8,19 @@ const CONTACT = {
   instagram: "https://www.instagram.com/wildbook.in",
 };
 
+const COPY_ICON = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="9" y="9" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.75" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="1.75" />
+  </svg>
+`;
+
+const CHECK_ICON = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+`;
+
 function buildVCard() {
   return [
     "BEGIN:VCARD",
@@ -55,6 +68,9 @@ async function copyText(value) {
 
 function setupCopyButtons() {
   document.querySelectorAll(".copy-btn").forEach((button) => {
+    button.innerHTML = COPY_ICON;
+    const originalLabel = button.getAttribute("aria-label") || "Copy";
+
     button.addEventListener("click", async (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -65,6 +81,7 @@ function setupCopyButtons() {
       try {
         await copyText(value);
         button.classList.add("is-copied");
+        button.innerHTML = CHECK_ICON;
         button.setAttribute("aria-label", "Copied");
       } catch {
         button.setAttribute("aria-label", "Copy failed");
@@ -72,16 +89,10 @@ function setupCopyButtons() {
 
       window.setTimeout(() => {
         button.classList.remove("is-copied");
-        const label = button.getAttribute("data-copy");
-        // restore original aria-label from a data attribute if present
-        const original =
-          button.dataset.label ||
-          `Copy ${label ?? "value"}`;
-        button.setAttribute("aria-label", original);
+        button.innerHTML = COPY_ICON;
+        button.setAttribute("aria-label", originalLabel);
       }, 1400);
     });
-
-    button.dataset.label = button.getAttribute("aria-label") || "Copy";
   });
 }
 
