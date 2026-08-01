@@ -133,10 +133,18 @@ h1 {
   animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
 }
 
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
 .link {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  min-width: 0;
   padding: 0.9rem 1rem;
   text-decoration: none;
   color: inherit;
@@ -168,6 +176,37 @@ h1 {
 .link-value {
   font-size: 1rem;
   font-weight: 600;
+}
+
+.copy-btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 0 0.9rem;
+  cursor: pointer;
+  min-width: 4.5rem;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.copy-btn:hover,
+.copy-btn:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  outline: none;
+}
+
+.copy-btn.is-copied {
+  border-color: var(--teal);
+  color: #9fd8d1;
 }
 
 .actions {
