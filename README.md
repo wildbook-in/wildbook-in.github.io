@@ -1,9 +1,9 @@
 # Wildbook digital cards
 
-User site: https://wildbook-in.github.io/
+**https://card.wildbook.in/**
 
 | Path | Person |
 |------|--------|
-| [/anurag/](https://wildbook-in.github.io/anurag/) | Anurag Jha · Founder |
+| [/anurag/](https://card.wildbook.in/anurag/) | Anurag Jha · Founder |
 
-Root `/` redirects to `/anurag/` for now. Add more people as sibling folders (`/name/index.html`).
+Root `/` redirects to `/anurag/`. Add more people as sibling folders.
