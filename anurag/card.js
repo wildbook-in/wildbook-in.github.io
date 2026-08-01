@@ -55,24 +55,33 @@ async function copyText(value) {
 
 function setupCopyButtons() {
   document.querySelectorAll(".copy-btn").forEach((button) => {
-    button.addEventListener("click", async () => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
       const value = button.getAttribute("data-copy");
       if (!value) return;
 
-      const original = button.textContent;
       try {
         await copyText(value);
-        button.textContent = "Copied";
         button.classList.add("is-copied");
+        button.setAttribute("aria-label", "Copied");
       } catch {
-        button.textContent = "Failed";
+        button.setAttribute("aria-label", "Copy failed");
       }
 
       window.setTimeout(() => {
-        button.textContent = original;
         button.classList.remove("is-copied");
+        const label = button.getAttribute("data-copy");
+        // restore original aria-label from a data attribute if present
+        const original =
+          button.dataset.label ||
+          `Copy ${label ?? "value"}`;
+        button.setAttribute("aria-label", original);
       }, 1400);
     });
+
+    button.dataset.label = button.getAttribute("aria-label") || "Copy";
   });
 }
 
