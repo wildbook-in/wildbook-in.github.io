@@ -34,7 +34,7 @@ function downloadVCard() {
   URL.revokeObjectURL(url);
 }
 
-const CARD_URL = "https://wildbook-in.github.io/";
+const CARD_URL = "https://wildbook-in.github.io/anurag/";
 
 function renderQr() {
   const canvas = document.getElementById("qr-canvas");
